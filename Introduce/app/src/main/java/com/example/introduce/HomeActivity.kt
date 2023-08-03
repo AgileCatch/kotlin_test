@@ -14,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
         R.drawable.cat3,
         R.drawable.cat4,
         R.drawable.cat5,
-        R.drawable.dog1,
+        R.drawable.dog,
 
         // 여기에 추가적으로 랜덤으로 가져올 이미지 리소스 ID를 추가합니다.
     )
