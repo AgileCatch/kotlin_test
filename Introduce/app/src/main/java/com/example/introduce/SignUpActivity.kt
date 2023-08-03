@@ -16,14 +16,18 @@ class SignUpActivity : AppCompatActivity() {
         val signUpId = findViewById<EditText>(R.id.signUpId)
         val signUpPw = findViewById<EditText>(R.id.signUpPw)
         val btnSignUp = findViewById<Button>(R.id.btnSignUp)
+        val signUpAge = findViewById<EditText>(R.id.signUpAge)
+        val signUpMBTI = findViewById<EditText>(R.id.signUpMBTI)
 
         btnSignUp.setOnClickListener {
             val name = signUpname.text.toString().trim()
             val id = signUpId.text.toString().trim()
             val password = signUpPw.text.toString().trim()
+            val age = signUpAge.text.toString().trim()
+            val mbti = signUpMBTI.text.toString().trim()
 
-            if (id.isEmpty() || password.isEmpty() || name.isEmpty()) {
-                // 아이디 또는 비밀번호가 비어있는 경우
+            if (id.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty()|| mbti.isEmpty()) {
+                // 정보들이 비어있는 경우
                 Toast.makeText(this, "입력되지 않은 정보가 있습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 // 로그인 성공
