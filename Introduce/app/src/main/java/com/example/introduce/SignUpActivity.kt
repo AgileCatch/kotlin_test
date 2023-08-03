@@ -29,14 +29,25 @@ class SignUpActivity : AppCompatActivity() {
                 // 로그인 성공
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
 
-                //SignnUp 데이터를 Home 으로 전달
+                //SignUp 데이터를 SignIn 으로 전달
                 val edit_name=findViewById<EditText>(R.id.signUpName)
                 val edit_id=findViewById<EditText>(R.id.signUpId)
+                val edit_pw=findViewById<EditText>(R.id.signUpPw)
+                val edit_age=findViewById<EditText>(R.id.signUpAge)
+                val edit_mbti=findViewById<EditText>(R.id.signUpMBTI)
+
                 val data_name =edit_name.text.toString()
                 val data_id =edit_id.text.toString()
-                val intent = Intent(this,HomeActivity::class.java)
-                intent.putExtra("Id Data",data_id)
+                val data_pw=edit_pw.text.toString()
+                val data_age=edit_age.text.toString()
+                val data_mbti=edit_mbti.text.toString()
+
+                val intent = Intent(this,SignInActivity::class.java)
                 intent.putExtra("name Data",data_name)
+                intent.putExtra("id Data",data_id)
+                intent.putExtra("pw Data",data_pw)
+                intent.putExtra("age Data",data_age)
+                intent.putExtra("mbti Data",data_mbti)
                 startActivity(intent)
 
                 // SignIn화면으로 전환
