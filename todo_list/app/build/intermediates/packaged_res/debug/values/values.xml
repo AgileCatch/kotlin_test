@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">Camp</string>
+    <string name="main_fab_todo_add_content_description">할일 추가 버튼</string>
+    <string name="main_tab_bookmark_title">Bookmark</string>
+    <string name="main_tab_todo_title">Todo</string>
+    <style name="Base.Theme.Camp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.Camp" parent="Base.Theme.Camp"/>
+</resources>
