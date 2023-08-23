@@ -1,0 +1,30 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable cat1
+drawable cat2
+drawable cat3
+drawable cat4
+drawable cat5
+drawable cat6
+drawable cat7
+drawable cat8
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id button1
+id button2
+id gridvew
+id listview
+layout activity_girdview
+layout activity_listview
+layout activity_main
+layout activity_main2
+layout activity_main3
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.View_binding
+style Theme.View_binding
+xml backup_rules
+xml data_extraction_rules
