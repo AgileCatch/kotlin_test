@@ -8,7 +8,7 @@ import android.widget.ImageView
 
 class ImageAdaptor : BaseAdapter() {
 
-    private val mThumbIds = arrayOf<Int>(
+    private val catIds = arrayOf<Int>(
         R.drawable.cat1, R.drawable.cat2,
         R.drawable.cat3, R.drawable.cat4,
         R.drawable.cat5, R.drawable.cat6,
@@ -21,11 +21,11 @@ class ImageAdaptor : BaseAdapter() {
     )
 
     override fun getCount(): Int {
-        return mThumbIds.size
+        return catIds.size
     }
 
     override fun getItem(position: Int): Any {
-        return mThumbIds[position]
+        return catIds[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -43,7 +43,7 @@ class ImageAdaptor : BaseAdapter() {
             imageView = convertView as ImageView
         }
 
-        imageView.setImageResource(mThumbIds.get(position))
+        imageView.setImageResource(catIds.get(position))
         return imageView
     }
 }

@@ -9,13 +9,13 @@ import java.util.zip.Inflater
 
 class ListviewActivity : AppCompatActivity() {
 
-    private lateinit var LVbinding : ActivityListviewBinding
+    private lateinit var binding : ActivityListviewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        LVbinding = ActivityListviewBinding.inflate(layoutInflater)
-        setContentView(LVbinding.root)
+        binding = ActivityListviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // 데이터 원본 준비
         val items = arrayOf<String?>("item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item5", "item6", "item7", "item8", "item5", "item6", "item7", "item8", "item5", "item6",  "item7", "item8")
@@ -24,7 +24,7 @@ class ListviewActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, items)
 
         //ListView 객체에 어댑터 연결
-        LVbinding.ListView.adapter = adapter
+        binding.ListView.adapter = adapter
 
     }
 }

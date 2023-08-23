@@ -13,21 +13,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         binding.btnMain.setOnClickListener {
-            binding.tvMain.text = "바인딩이 잘 되었습니다 :)"
+            binding.tvMain.text = "바인딩이 잘 되었습니다 !"
         }
 
         binding.btnLv.setOnClickListener {
-            val intentLV = Intent(this@MainActivity,ListviewActivity::class.java)
-            startActivity(intentLV)
+            val view1 = Intent(this@MainActivity,ListviewActivity::class.java)
+            startActivity(view1)
         }
 
         binding.btnGv.setOnClickListener {
-            val intentGV = Intent(this@MainActivity,ImgGridviewActivity::class.java)
-            startActivity(intentGV)
+            val view2 = Intent(this@MainActivity,ImgGridviewActivity::class.java)
+            startActivity(view2)
         }
 
 

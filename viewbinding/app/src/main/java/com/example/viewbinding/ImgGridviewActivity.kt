@@ -7,19 +7,19 @@ import com.example.viewbinding.databinding.ActivityGridviewBinding
 
 class ImgGridviewActivity : AppCompatActivity() {
 
-    private lateinit var GVbinding : ActivityGridviewBinding
+    private lateinit var binding: ActivityGridviewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        GVbinding = ActivityGridviewBinding.inflate(layoutInflater)
-        setContentView(GVbinding.root)
+        binding = ActivityGridviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        GVbinding.GridView.adapter = ImageAdaptor()
+        binding.GridView.adapter = ImageAdaptor()
 
         // 항목 클릭 이벤트 처리
-        GVbinding.GridView.setOnItemClickListener{ parent, view, position, id ->
+        binding.GridView.setOnItemClickListener{ parent, view, position, id ->
             Toast.makeText(this@ImgGridviewActivity,"" + (position + 1) + "번째 선택",
                 Toast.LENGTH_SHORT).show()
         }
