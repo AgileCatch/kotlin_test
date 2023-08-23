@@ -36,7 +36,6 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
         fun bind(item: TodoModel) = with(binding) {
             title.text = item.title
-            content.text=item.content
         }
     }
 
