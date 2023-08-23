@@ -1,5 +1,6 @@
 package com.jess.camp.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.jess.camp.R
 import com.jess.camp.databinding.MainActivityBinding
 import com.jess.camp.todo.TodoAddActivity
+import com.jess.camp.todo.TodoModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         // 2주차 선발대 과제 버튼 클릭시 추가하기
         fabAddTodo.setOnClickListener {
-            val intent = Intent(this@MainActivity, TodoAddActivity::class.java)
-            startActivity(intent)
+            viewPagerAdapter.launchAddTodoActivity()
         }
+
+
+    }
+    companion object {
+        private const val ADD_TODO_REQUEST = 1
     }
 }

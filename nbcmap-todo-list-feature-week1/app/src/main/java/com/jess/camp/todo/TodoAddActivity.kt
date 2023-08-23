@@ -1,20 +1,29 @@
 package com.jess.camp.todo
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.jess.camp.R
+import com.jess.camp.databinding.TodoAddActivityBinding
 
-class TodoAddActivity:AppCompatActivity() {
+class TodoAddActivity : AppCompatActivity() {
+
+    private lateinit var binding: TodoAddActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.todo_add_activity)
+        binding = TodoAddActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar=findViewById<Toolbar>(R.id.tool_bar)
-        setSupportActionBar(toolbar)
-        val ab = supportActionBar!!
-        ab.setDisplayShowTitleEnabled(true)
-        ab.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
-        ab.setDisplayHomeAsUpEnabled(true)
+        binding.btnAdd.setOnClickListener {
+            val newTodoTitle = binding.title.text.toString()
+            val newTodoContent = binding.content.text.toString()
+
+            val intent = Intent()
+            intent.putExtra("newTodoTitle", newTodoTitle)
+            intent.putExtra("newTodoContent", newTodoContent)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 }
