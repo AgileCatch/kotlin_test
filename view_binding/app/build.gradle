@@ -7,6 +7,11 @@ android {
     namespace 'com.example.view_binding'
     compileSdk 33
 
+    buildFeatures{
+        viewBinding = true
+    }
+
+
     defaultConfig {
         applicationId "com.example.view_binding"
         minSdk 30
