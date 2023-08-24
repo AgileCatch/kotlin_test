@@ -22,6 +22,12 @@ class MainViewPagerAdapter(
         )
     }
 
+    //Todo프래그먼트 가져오기
+    fun getFragment():TodoFragment{
+        //TodoFragment
+        return fragments[0].fragment as TodoFragment
+    }
+
     fun getTitle(position: Int): Int {
         return fragments[position].titleRes
     }

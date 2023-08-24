@@ -10,9 +10,10 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
     private val list = ArrayList<TodoModel>()
 
-    fun addItems(items: List<TodoModel>) {
-        list.addAll(items)
-        notifyDataSetChanged()
+    //handleInput 메소드에서 어댑터에 아이템을 추가하는 부분
+    fun addItem(item: TodoModel) {
+        list.add(item)
+        notifyItemInserted(list.size - 1)
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +37,7 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
         fun bind(item: TodoModel) = with(binding) {
             title.text = item.title
+            content.text=item.content
         }
     }
 

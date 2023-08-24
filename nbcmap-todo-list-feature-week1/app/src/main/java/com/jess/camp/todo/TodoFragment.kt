@@ -9,6 +9,7 @@ import com.jess.camp.databinding.TodoFragmentBinding
 
 class TodoFragment : Fragment() {
 
+
     companion object {
         fun newInstance() = TodoFragment()
     }
@@ -16,6 +17,7 @@ class TodoFragment : Fragment() {
     private var _binding: TodoFragmentBinding? = null
     private val binding get() = _binding!!
 
+    //데이터 추가
     private val listAdapter by lazy {
         TodoListAdapter()
     }
@@ -33,26 +35,38 @@ class TodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
 
-        // for test
-        val testList = arrayListOf<TodoModel>()
-        for (i in 0 until 100) {
-            testList.add(
-                TodoModel(
-                    id = i,
-                    "Todo Title $i"
-                )
-            )
-        }
-
-        listAdapter.addItems(testList)
+//        // for test
+//        val testList = arrayListOf<TodoModel>()
+//        for (i in 0 until 100) {
+//            testList.add(
+//                TodoModel(
+//                    id = i,
+//                    "Todo Title $i"
+//                )
+//            )
+//        }
+//
+//        listAdapter.addItem(testList)
     }
 
     private fun initView() = with(binding) {
         todoList.adapter = listAdapter
     }
 
+    fun handleInput(title: String?, content: String?) {
+        if (title != null && content != null) {
+            val newTodoModel = TodoModel(
+                id = listAdapter.itemCount, // 새로운 아이템의 ID를 리스트 크기로 설정
+                title = title,
+                content=content
+            )
+            listAdapter.addItem(newTodoModel)
+        }
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
+
 }
