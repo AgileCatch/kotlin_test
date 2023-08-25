@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jess.camp.R
@@ -39,12 +40,11 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 화면 초기화 메서드를 호출합니다.
-        initView()
-
         //버튼 클릭시 숨김처리
         fabAddTodo = binding.fabAddTodo
 
+        // 화면 초기화 메서드를 호출합니다.
+        initView()
 
     }
 
@@ -59,6 +59,18 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setText(viewPagerAdapter.getTitle(position))
         }.attach()
+
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                // 페이지가 변경되었을 때 호출됨
+                if (position == 0) {
+                    fabAddTodo.show() // 첫 번째 탭인 경우 FAB 보이기
+                } else {
+                    fabAddTodo.hide() // 다른 탭인 경우 FAB 숨기기
+                }
+            }
+        })
 
         // 2주차 선발대 과제 버튼 클릭시 추가하기
         fabAddTodo.setOnClickListener {
