@@ -103,16 +103,16 @@ class MainActivity : AppCompatActivity() {
             picker.show()
         }
 
-        // 5. 프로그레스 다이얼로그
-        binding.btn5Porgress.setOnClickListener {
-            // 권장하진 않지만 사용은 가능하다.
-            pro = ProgressDialog.show(this, "타이틀입니다.", "메시지입니다.")
-
-            // 핸들러를 통해서 종료 작업을 한다.
-            val handler = Handler()
-            val thread = Runnable { pro?.cancel() }
-            handler.postDelayed(thread, 5000) // 딜레이는 5초
-        }
+//        // 5. 프로그레스 다이얼로그
+//        binding.btn5Porgress.setOnClickListener {
+//            // 권장하진 않지만 사용은 가능하다.
+//            pro = ProgressDialog.show(this, "타이틀입니다.", "메시지입니다.")
+//
+//            // 핸들러를 통해서 종료 작업을 한다.
+//            val handler = Handler()
+//            val thread = Runnable { pro?.cancel() }
+//            handler.postDelayed(thread, 5000) // 딜레이는 5초
+//        }
 
 
 //6. 프로그래스 다이얼로그 다른 방식. (커스텀과 비슷)
