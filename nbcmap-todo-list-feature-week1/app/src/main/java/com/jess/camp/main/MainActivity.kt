@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
 
         // TabLayoutMediator를 사용하여 TabLayout과 ViewPager2를 연결합니다.
-        // 탭을 생성하고, 각 탭에 대한 제목은 viewPagerAdapter에서 가져옵니다
+        // 탭을 생성하고, 각 탭에 대한 제목은 viewPagerAdapter에서 가져옵니다.
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setText(viewPagerAdapter.getTitle(position))
         }.attach()
