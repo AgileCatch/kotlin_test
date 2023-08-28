@@ -32,6 +32,7 @@ class MainViewPagerAdapter(
         return fragments[position].titleRes
     }
 
+
     override fun getItemCount(): Int {
         return fragments.size
     }

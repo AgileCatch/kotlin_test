@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     fabAddTodo.hide() // 다른 탭인 경우 FAB 숨기기
                 }
+
             }
         })
 

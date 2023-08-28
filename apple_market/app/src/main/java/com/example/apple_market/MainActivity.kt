@@ -10,6 +10,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //툴바 설정
+        setSupportActionBar(binding.toolBar)
+        val ab = supportActionBar!!
+//        ab.setDisplayShowTitleEnabled(true)
+
+       // ab.setHomeAsUpIndicator(R.drawable.icon_notification)
+        ab.setDisplayHomeAsUpEnabled(true)
     }
 
 }
