@@ -77,45 +77,51 @@
             android:id="@+id/btn_chat"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="188dp"
+            android:layout_marginTop="75dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_chat"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/bubble_chat" />
 
         <ImageButton
             android:id="@+id/btn_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="75dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_like"
+            app:layout_constraintStart_toEndOf="@+id/btn_chat"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/heart" />
 
         <TextView
             android:id="@+id/tv_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="7dp"
+            android:layout_marginStart="3dp"
             android:layout_marginBottom="4dp"
             android:text="16"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_like" />
+            app:layout_constraintStart_toEndOf="@+id/btn_chat" />
 
         <TextView
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:text="25"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_like" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
