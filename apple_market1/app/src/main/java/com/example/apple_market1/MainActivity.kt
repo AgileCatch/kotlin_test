@@ -1,6 +1,7 @@
 package com.example.apple_market1
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -13,7 +14,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +28,23 @@ import com.example.apple_market1.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ProductAdapter
+
+    private val getResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { reslut ->
+            if (reslut.resultCode == Activity.RESULT_OK) {
+                val data = reslut.data
+                val position = data?.getIntExtra("position", -1)
+                val likeCount = data?.getIntExtra("likeCount", -1)
+                if (position != -1 && likeCount != -1) {
+                    if (likeCount != null) {
+                        productList[position!!].like = likeCount
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+//
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -76,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 val product = adapter.getItem(position)
                 val intent = Intent(this@MainActivity, ProductDetailActivity::class.java)
                 intent.putExtra("position", position)
-                startActivity(intent)
+                getResult.launch(intent)
             }
         }
         adapter.itemLongClick = object : ProductAdapter.ItemLongClick {
@@ -192,3 +212,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
