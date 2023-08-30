@@ -4,35 +4,27 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.ProgressDialog.show
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.BitmapFactory
 import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
-import androidx.core.view.isVisible
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apple_market1.ProductSingleton.productList
 import com.example.apple_market1.databinding.ActivityMainBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: ProductAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,8 +46,9 @@ class MainActivity : AppCompatActivity() {
 
         //싱글톤과 데이터 연결
         val productList = ProductSingleton.getproductList()
-        // ProductAdapter 인스턴스 생성 및 데이터 전달
-        val adapter = ProductAdapter(productList as ArrayList<ProductData>)
+        adapter = ProductAdapter(productList as ArrayList<ProductData>)
+        binding.rvProductList.adapter = adapter
+
         val recyclerView = binding.rvProductList
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -75,16 +68,22 @@ class MainActivity : AppCompatActivity() {
 
         fabUpArrow.setOnClickListener {
             recyclerView.smoothScrollToPosition(0) // 최상단으로 스크롤
-//            changeFabIconColor(fabUpArrow)
         }
 
         adapter.itemClick = object : ProductAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+                // 상품 클릭 이벤트 처리
                 val product = adapter.getItem(position)
-                // 클릭한 아이템 가져오기
                 val intent = Intent(this@MainActivity, ProductDetailActivity::class.java)
                 intent.putExtra("position", position)
                 startActivity(intent)
+            }
+        }
+        adapter.itemLongClick = object : ProductAdapter.ItemLongClick {
+            override fun onLongClick(view: View, position: Int) {
+
+                // 상품 롱클릭 이벤트 처리 (삭제 확인 다이얼로그 띄우기 등)
+                showDeleteDialog(position)
 
             }
         }
@@ -170,6 +169,25 @@ class MainActivity : AppCompatActivity() {
             )
         }
         manager.notify(11, builder.build())
+    }
+
+    private fun showDeleteDialog(position: Int) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("삭제 확인")
+        builder.setMessage("해당 상품을 삭제하시겠습니까?")
+        builder.setPositiveButton("확인") { _, _ ->
+            deleteProduct(position)
+        }
+        builder.setNegativeButton("취소", null)
+        builder.show()
+    }
+
+    private fun deleteProduct(position: Int) {
+        if (position in 0 until productList.size) {
+            adapter.removeItem(position)
+            binding.rvProductList.adapter?.notifyItemRemoved(position)
+            Toast.makeText(this, "상품이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

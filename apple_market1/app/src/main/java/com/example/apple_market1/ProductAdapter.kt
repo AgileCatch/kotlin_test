@@ -3,8 +3,6 @@ package com.example.apple_market1
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apple_market1.databinding.ItemProductBinding
 
@@ -14,8 +12,13 @@ class ProductAdapter(var productList: ArrayList<ProductData>) :
     interface ItemClick {
         fun onClick(view: View, position: Int)
     }
+    interface ItemLongClick{
+        fun onLongClick(view: View, position: Int)
+    }
+
 
     var itemClick: ItemClick? = null
+    var itemLongClick: ItemLongClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,6 +28,10 @@ class ProductAdapter(var productList: ArrayList<ProductData>) :
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.itemView.setOnClickListener {  //클릭이벤트추가부분
             itemClick?.onClick(it, position)
+        }
+        holder.itemView.setOnLongClickListener {  //클릭이벤트추가부분
+            itemLongClick?.onLongClick(it, position)
+            true
         }
         holder.productImg.setImageResource(productList[position].productImg)
         holder.productName.text = productList[position].productName
@@ -36,6 +43,10 @@ class ProductAdapter(var productList: ArrayList<ProductData>) :
 
     fun getItem(position: Int): ProductData {
         return productList[position]
+    }
+    fun removeItem(position: Int){
+        productList.removeAt(position)
+        notifyDataSetChanged()
     }
 
     override fun getItemId(position: Int): Long {
