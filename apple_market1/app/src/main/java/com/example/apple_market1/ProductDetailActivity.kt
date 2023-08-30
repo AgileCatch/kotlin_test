@@ -1,14 +1,16 @@
 package com.example.apple_market1
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.example.apple_market1.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding= ActivityProductDetailBinding.inflate(layoutInflater)
+        val binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -27,5 +29,9 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.imageView.setImageResource(productImg)
         binding.tvIntroduction.text = introduction
         binding.tvPrice.text = price
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
