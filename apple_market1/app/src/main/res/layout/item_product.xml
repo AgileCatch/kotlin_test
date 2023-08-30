@@ -39,12 +39,14 @@
 
         <TextView
             android:id="@+id/tv_productName"
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="프라다 복조리백"
             android:textColor="@color/black"
             android:textSize="17dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@+id/cardView"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
@@ -77,13 +79,13 @@
             android:id="@+id/btn_chat"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="188dp"
             android:layout_marginTop="75dp"
+            android:layout_marginEnd="3dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintEnd_toStartOf="@+id/tv_chat"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/bubble_chat" />
 
@@ -91,37 +93,35 @@
             android:id="@+id/btn_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="75dp"
+            android:layout_marginEnd="3dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_chat"
+            app:layout_constraintEnd_toStartOf="@+id/tv_like"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.645"
             app:srcCompat="@drawable/heart" />
 
         <TextView
             android:id="@+id/tv_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="4dp"
             android:text="16"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_chat" />
+            app:layout_constraintEnd_toStartOf="@+id/btn_like" />
 
         <TextView
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:text="25"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_like" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
