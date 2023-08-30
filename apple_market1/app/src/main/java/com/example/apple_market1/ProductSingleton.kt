@@ -4,7 +4,7 @@ import android.net.Uri
 import org.w3c.dom.Comment
 
 object ProductSingleton {
-    private var productList: MutableList<ProductData> = mutableListOf(
+     var productList: MutableList<ProductData> = mutableListOf(
         ProductData(R.drawable.sample1, "산지 한달된 선풍기 팝니다", "이사가서 필요가 없어졌어요 급하게 내놓습니다", "대현동", "1,000원", "서울 서대문구 창천동", 13, 25),
         ProductData(R.drawable.sample2, "김치냉장고", "이사로인해 내놔요", "안마담", "20,000원", "인천 계양구 귤현동", 8, 28),
         ProductData(R.drawable.sample3, "샤넬 카드지갑", "고퀄지갑이구요\n사용감이 있어서 싸게 내어둡니다", "코코유", "10,000원", "수성구 범어동", 23, 5),

@@ -38,13 +38,7 @@ class MainActivity : AppCompatActivity() {
                 val product = adapter.getItem(position)
                 // 클릭한 아이템 가져오기
                 val intent = Intent(this@MainActivity, ProductDetailActivity::class.java)
-                intent.putExtra("seller", product.seller)
-                intent.putExtra("address", product.address)
-                intent.putExtra("productName", product.productName)
-                intent.putExtra("productImg", product.productImg)
-                intent.putExtra("introduction", product.introduction)
-                intent.putExtra("price", product.price)
-
+                intent.putExtra("position", position)
                 startActivity(intent)
 
             }
@@ -63,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         builder.setIcon(R.drawable.bubble_chat)
 
 
-        builder.setMessage("앱을 종료하시겠습니까?")
+        builder.setMessage("정말 앱을 종료하시겠습니까?")
             .setPositiveButton("확인") { _: DialogInterface, _: Int ->
                 finish() // 앱 종료
             }
