@@ -98,8 +98,4 @@ object ProductSingleton {
         return productList
     }
 
-    fun addproductinfo(productinfo: ProductData) {
-        productList.add(0, productinfo)
-    }
-
 }

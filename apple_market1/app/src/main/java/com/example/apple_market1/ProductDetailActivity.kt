@@ -1,12 +1,10 @@
 package com.example.apple_market1
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.example.apple_market1.ProductSingleton.productList
 import com.example.apple_market1.databinding.ActivityProductDetailBinding
 
