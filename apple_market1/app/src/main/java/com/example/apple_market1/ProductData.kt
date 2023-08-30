@@ -7,7 +7,7 @@ data class ProductData(
     var productName:String,
     var introduction:String,
     var seller:String,
-    var price:String,
+    var price:Int,
     var address:String,
     var like:Int,
     var chat:Int

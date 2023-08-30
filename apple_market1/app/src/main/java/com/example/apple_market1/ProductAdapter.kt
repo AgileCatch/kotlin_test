@@ -28,7 +28,7 @@ class ProductAdapter(var productList: ArrayList<ProductData>) :
         }
         holder.productImg.setImageResource(productList[position].productImg)
         holder.productName.text = productList[position].productName
-        holder.price.text = productList[position].price
+        holder.price.text = formatPrice(productList[position].price)
         holder.address.text = productList[position].address
         holder.like.text = productList[position].like.toString()
         holder.chat.text = productList[position].chat.toString()

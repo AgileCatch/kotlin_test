@@ -23,7 +23,7 @@ class ProductDetailActivity : AppCompatActivity() {
         val productName = product.productName
         val productImg = product.productImg
         val introduction = product.introduction
-        val price = product.price
+        val price = formatPrice(product.price)
 
         // 받은 데이터를 활용하여 디테일 화면 구성
         binding.apply {

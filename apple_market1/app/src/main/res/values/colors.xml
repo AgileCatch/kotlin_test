@@ -6,4 +6,6 @@
     <color name="gray2">#C6C6C6</color>
     <color name="orenge">#FF6600</color>
     <color name="green">#009678</color>
+    <color name="fab_normal_color">#FF4081</color>
+    <color name="fab_pressed_color">#F44336</color>
 </resources>

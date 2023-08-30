@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.ProgressDialog.show
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.BitmapFactory
 import android.media.AudioAttributes
 import android.media.RingtoneManager
@@ -15,20 +17,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.apple_market1.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolBar.title = "내배캠동"
@@ -39,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     notification()
                     true
                 }
+
                 else -> false
             }
         }
@@ -48,9 +56,27 @@ class MainActivity : AppCompatActivity() {
         val productList = ProductSingleton.getproductList()
         // ProductAdapter 인스턴스 생성 및 데이터 전달
         val adapter = ProductAdapter(productList as ArrayList<ProductData>)
-        binding.rvProductList.adapter = adapter
-        binding.rvProductList.layoutManager = LinearLayoutManager(this)
+        val recyclerView = binding.rvProductList
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // 플로팅 버튼 및 스크롤 설정
+        val fabUpArrow = binding.fabUpArrow
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    fabUpArrow.show() // 아래로 스크롤하면 플로팅 버튼 보이기
+
+                } else {
+                    fabUpArrow.hide() // 위로 스크롤하면 플로팅 버튼 숨기기
+                }
+            }
+        })
+
+        fabUpArrow.setOnClickListener {
+            recyclerView.smoothScrollToPosition(0) // 최상단으로 스크롤
+//            changeFabIconColor(fabUpArrow)
+        }
 
         adapter.itemClick = object : ProductAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -62,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
     }
 
     // 뒤로가기 버튼 동작을 가로채서 팝업 표시
@@ -144,4 +171,6 @@ class MainActivity : AppCompatActivity() {
         }
         manager.notify(11, builder.build())
     }
+
+
 }
