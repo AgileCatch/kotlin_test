@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">todolist</string>
+    <string name="main_fab_todo_add_content_description">할일 추가 버튼</string>
+</resources>
