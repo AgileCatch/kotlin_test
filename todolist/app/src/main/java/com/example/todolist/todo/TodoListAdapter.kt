@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.databinding.BookmarkItemBinding
+import com.example.todolist.databinding.TodoItemBinding
 
 class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
     private val list = ArrayList<TodoModel>()
@@ -15,8 +16,7 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoListAdapter.ViewHolder {
         return ViewHolder(
-            BookmarkItemBinding.inflate(
-                LayoutInflater.from(parent.context)
+            TodoItemBinding.inflate(LayoutInflater.from(parent.context)
             )
         )
     }
@@ -31,7 +31,7 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
     }
 
     class ViewHolder(
-        private val binding: BookmarkItemBinding
+        private val binding: TodoItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TodoModel){
             binding.title.text=item.title

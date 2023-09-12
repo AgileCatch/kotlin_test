@@ -37,17 +37,23 @@ class TodoListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+
+        // for test
+        val testList = arrayListOf<TodoModel>()
+        for (i in 0 until 100) {
+            testList.add(
+                TodoModel(
+                    id = i,
+                    "Todo Title $i"
+                )
+            )
+        }
+        recyclerViewAdapter.addItems(testList)
     }
 
     private fun initView() {
         binding.todoList.adapter = recyclerViewAdapter
 
-        //test data
-        val list = ArrayList<TodoModel>()
-        for (i in 0..100) {
-            list.add(TodoModel("todo  $i"))
-        }
-        recyclerViewAdapter.addItems(list)
     }
 
     //바인딩을 위해 메모리 누수를 위해 강제적으로 초기화시켜줘야함

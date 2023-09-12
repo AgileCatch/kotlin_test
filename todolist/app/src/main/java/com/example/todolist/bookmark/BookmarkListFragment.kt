@@ -34,19 +34,25 @@ class BookmarkListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
+
+        // for testww
+        val testList = arrayListOf<BookMarkModel>()
+        for (i in 0 until 100) {
+            testList.add(
+                BookMarkModel(
+                    id = i,
+                    "Bookmark Title $i"
+                )
+            )
+        }
+
+        recyclerViewAdapter.addItems(testList)
     }
 
     private fun initView() {
         binding.bookmarkList.adapter = recyclerViewAdapter
 
-        //test data
-        val list = ArrayList<BookMarkModel>()
-        for (i in 0..100) {
-            list.add(BookMarkModel("$i"))
-        }
-        recyclerViewAdapter.addItems(list)
     }
 
     //바인딩을 위해 메모리 누수를 위해 강제적으로 초기화시켜줘야함

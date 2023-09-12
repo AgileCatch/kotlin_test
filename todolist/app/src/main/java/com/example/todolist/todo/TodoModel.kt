@@ -1,5 +1,6 @@
 package com.example.todolist.todo
 
 data class TodoModel(
-    val title:String
+    val id: Int,
+    val title: String
 )
