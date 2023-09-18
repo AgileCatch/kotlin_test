@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -47,13 +50,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //    def room_version = "2.5.1"
-    implementation ("androidx.room:room-runtime:2.5.1")
-    annotationProcessor ("androidx.room:room-compiler:2.5.1")
-    kapt ("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.1")
+    annotationProcessor("androidx.room:room-compiler:2.5.1")
+    kapt("androidx.room:room-compiler:2.5.1")
     // optional - Kotlin Extensions and Coroutines support for Room
-    implementation ("androidx.room:room-ktx:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
     // optional - Test helpers
-    testImplementation ("androidx.room:room-testing:2.5.1")
+    testImplementation("androidx.room:room-testing:2.5.1")
 
 
 }
