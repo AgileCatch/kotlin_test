@@ -38,7 +38,6 @@ android {
         viewBinding=true
 
     }
-
 }
 
 dependencies {
