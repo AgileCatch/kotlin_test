@@ -16,13 +16,12 @@ class LockerFragment : Fragment() {
     }
 
     private var _binding: LockerFragmentBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+    private val listAdapter by lazy {
+        LockerListAdapter()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,14 +29,35 @@ class LockerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = LockerFragmentBinding.inflate(layoutInflater)
-        return binding?.root
+        return binding.root
     }
 
     //프래그먼트 뷰 생성후 해야할일 설정하는곳
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //recycler View에 대한 초기화를 해줘야함
+        //recyclerView 에 대한 초기화를 해줘야함
+        initView()
+
+        // for test
+        val testList = arrayListOf<LockerModel>()
+        for (i in 0 until 100) {
+            testList.add(
+                LockerModel(
+                    id = i,
+                    0,
+                    "Locker Name $i",
+                    "Locker Date $i"
+                )
+            )
+        }
+        listAdapter.addItems(testList)
     }
+
+    private fun initView() = with(binding) {
+        //어댑터 연결
+        lockerList.adapter =listAdapter
+    }
+
 
     //프래그먼트의 메모리 누수를 방지하기 위해 넣어줌 (구글 권장)
     override fun onDestroyView() {

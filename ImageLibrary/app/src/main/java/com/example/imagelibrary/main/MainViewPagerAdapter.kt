@@ -13,6 +13,7 @@ class MainViewPagerAdapter(
 
     private val fragments = ArrayList<MainTabs>()
 
+    //페이지 생성 관리
     init {
         fragments.add(
             MainTabs(SearchFragment.newInstance(), R.string.main_tab_search_title)
@@ -22,18 +23,15 @@ class MainViewPagerAdapter(
         )
     }
 
-//    fun getFragment(position: Int): Fragment {
-//        return fragments[position].fragment
-//    }
-
     fun getTitle(position: Int): Int {
         return fragments[position].titleRes
     }
 
+    //화면의 갯수
     override fun getItemCount(): Int {
         return fragments.size
     }
-
+    
     override fun createFragment(position: Int): Fragment {
         return fragments[position].fragment
     }
