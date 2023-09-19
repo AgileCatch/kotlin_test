@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         MainViewPagerAdapter(this@MainActivity)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private fun initView() = with(binding) {
         //view pager adapter
         viewPager.adapter = viewPagerAdapter
+
+
 
         // TabLayout x ViewPager2
         TabLayoutMediator(tabLayout,viewPager) { tab, position ->

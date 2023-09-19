@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.imagelibrary.R
 import com.example.imagelibrary.locker.LockerFragment
-import com.example.imagelibrary.searchResults.SearchFragment
+import com.example.imagelibrary.searchresults.search.SearchFragment
 
 class MainViewPagerAdapter(
     fragmentActivity: FragmentActivity
@@ -33,6 +33,9 @@ class MainViewPagerAdapter(
     }
     
     override fun createFragment(position: Int): Fragment {
+        return fragments[position].fragment
+    }
+    fun getFragment(position: Int):Fragment{
         return fragments[position].fragment
     }
 }
