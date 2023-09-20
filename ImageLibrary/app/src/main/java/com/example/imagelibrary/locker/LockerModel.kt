@@ -1,9 +1,13 @@
 package com.example.imagelibrary.locker
 
-data class LockerModel (
-    val id: Int,
-    val image : Int,
-    val name :String,
-    val date :String,
-    var isBookMark : Boolean =false
-)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class LockerModel(
+    val id: Long,
+    val image: Int,
+    val name: String,
+    val date: String,
+    var isBookMark: Boolean = false,
+): Parcelable

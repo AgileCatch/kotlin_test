@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.imagelibrary.R
+import androidx.fragment.app.viewModels
 import com.example.imagelibrary.databinding.LockerFragmentBinding
 
 class LockerFragment : Fragment() {
@@ -17,6 +17,7 @@ class LockerFragment : Fragment() {
 
     private var _binding: LockerFragmentBinding? = null
     private val binding get() = _binding!!
+    private val viewModel : LockerViewModel by viewModels{LockerViewModelFactory()}
 
     private val listAdapter by lazy {
         LockerListAdapter()
@@ -37,25 +38,20 @@ class LockerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //recyclerView 에 대한 초기화를 해줘야함
         initView()
+        initViewModel()
 
-        // for test
-        val testList = arrayListOf<LockerModel>()
-        for (i in 0 until 100) {
-            testList.add(
-                LockerModel(
-                    id = i,
-                    0,
-                    "Locker Name $i",
-                    "Locker Date $i"
-                )
-            )
-        }
-        listAdapter.addItems(testList)
     }
 
     private fun initView() = with(binding) {
         //어댑터 연결
         lockerList.adapter =listAdapter
+    }
+
+    private fun initViewModel()= with(viewModel) {
+        // viewModel 상 읽기용 list
+        list.observe(viewLifecycleOwner) { // Fragment LV : observe(viewLifecycleOwner)
+            listAdapter.submitList(it)
+        }
     }
 
 

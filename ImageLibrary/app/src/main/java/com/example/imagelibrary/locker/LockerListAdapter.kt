@@ -24,7 +24,6 @@ class LockerListAdapter : ListAdapter<LockerModel, LockerListAdapter.ViewHolder>
     }
 ) {
 
-    private val list = ArrayList<LockerModel>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int, ):ViewHolder {
         return ViewHolder(
@@ -34,7 +33,7 @@ class LockerListAdapter : ListAdapter<LockerModel, LockerListAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position] // ListAdapter의 메소드 getItem
+        val item = getItem(position) // ListAdapter의 메소드 getItem
         holder.bind(item)
     }
 
@@ -49,13 +48,5 @@ class LockerListAdapter : ListAdapter<LockerModel, LockerListAdapter.ViewHolder>
 
     }
 
-    fun addItems(items: List<LockerModel>) {
-        list.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
 
 }
