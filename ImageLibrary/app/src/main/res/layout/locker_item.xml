@@ -20,13 +20,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/cat6" />
+            android:src="@drawable/ic_cat" />
 
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/heart" />
+            android:src="@drawable/ic_heart" />
 
     </androidx.cardview.widget.CardView>
 
@@ -39,6 +39,8 @@
         android:text="name"
         android:textStyle="bold"
         android:textSize="20dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="@+id/cv_image"
         app:layout_constraintStart_toStartOf="@+id/cv_image"
         app:layout_constraintTop_toBottomOf="@+id/cv_image" />
