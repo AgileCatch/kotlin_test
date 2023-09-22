@@ -2,20 +2,92 @@ package com.example.imagelibrary.searchresults.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
-import java.util.concurrent.atomic.AtomicLong
+import com.example.imagelibrary.api.RetrofitClient
+import com.example.imagelibrary.api.image.ImageModel
+import com.example.imagelibrary.api.video.VideoModel
+import retrofit2.Response
 
-class SearchViewModelFactory (private val idGenerate: AtomicLong) : ViewModelProvider.Factory{
-    // ViewModelProvider.Factory 인터페이스를 구현하기 위해 create 메서드를 오버라이드
-    // 이 메서드는 ViewModel 인스턴스를 생성하는 역할을 함
+/**
+ * SearchViewModelFactory 클래스는 ViewModelProvider.Factory 인터페이스를 구현하는 사용자 정의 ViewModel 팩토리.
+ * 이 팩토리는 SearchViewModel을 생성할 때 필요한 의존성을 주입하는 역할
+ */
+
+//Retrofit_interface 타입의 apiService를 매개변수로 받고, apiService는 나중에 SearchViewModel을 생성할 때 주입
+class SearchViewModelFactory() : ViewModelProvider.Factory {
+    private val repository = Repository()
     override fun <T: ViewModel> create(modelClass: Class<T>): T {
-        // create 메서드는 요청된 ViewModel 클래스 (modelClass)를 기반으로 ViewModel을 생성한다.
-
-        if(modelClass.isAssignableFrom(SearchViewModel::class.java)){ // 요청된 modelClass가 SearchViewModel Class와 호환 가능한지 확인
-            return SearchViewModel(idGenerate) as T //호환되는 경우 생성된 ViewModel을 T타입으로 형변환 하여 반환
+        if(modelClass.isAssignableFrom(SearchViewModel::class.java)){
+            return SearchViewModel(repository) as T
         }
         throw IllegalArgumentException("Not Found ViewModel class.") // 호환되지 않는 경우 알림
     }
 }
-// provider로 뷰모델을 생성하는 과정에서 Factory 필요
-// 뷰모델에 주입
+
+class Repository {
+    private val searchList: MutableList<SearchModel> = mutableListOf()
+
+    private suspend fun searchImage(query: String, sort: String, page: Int): Response<ImageModel> {
+        return RetrofitClient.api.imageSearch(query = query, sort = sort, page = page, size = 20)
+    }
+    private suspend fun searchVideo(query: String, sort: String, page: Int): Response<VideoModel> {
+        return RetrofitClient.api.videoSearch(query = query, sort = sort, page = page, size = 20)
+    }
+
+
+    suspend fun searchData(query: String, sort: String, page: Int): MutableList<SearchModel> {
+        val imageAPI = searchImage(query, sort, page)
+        val videoAPI = searchVideo(query, sort, page)
+        searchList.clear()
+
+        if(imageAPI.isSuccessful && videoAPI.isSuccessful){
+            imageAPI.body()?.documents?.imageToSearchModel()?.let { searchList.addAll(it) }
+            videoAPI.body()?.documents?.videoToSearchModel()?.let { searchList.addAll(it) }
+
+            searchList.sortByDescending { it.dateTime }
+        }
+        return searchList
+    }
+
+
+    private fun MutableList<ImageModel.Documents>.imageToSearchModel(): MutableList<SearchModel> {
+        val list: MutableList<SearchModel> = mutableListOf()
+        for (i in 0 until this.size) {
+            list.add(
+                i,
+                SearchModel(
+                    title = "[Image] ${this[i].displaySitename}",
+                    dateTime = this[i].datetime,
+                    url = this[i].imageUrl
+                )
+            )
+        }
+        return list
+    }
+
+    private fun MutableList<VideoModel.Documents>.videoToSearchModel(): MutableList<SearchModel> {
+        val list: MutableList<SearchModel> = mutableListOf()
+        for (i in 0 until this.size) {
+            list.add(
+                i,
+                SearchModel(
+                    title = "[Video] ${this[i].title}",
+                    dateTime = this[i].datetime,
+                    url = this[i].thumbnail
+                )
+            )
+        }
+        return list
+    }
+}
+
+/**
+ * 제네릭 파라미터 T는 반환될 ViewModel의 타입을 나타냄
+ * 함수 내에서는 SearchViewModel의 인스턴스를 생성하고, 필요한 apiService를 주입
+ * 이후 생성된 SearchViewModel 인스턴스를 T 타입으로 캐스팅하여 반환
+ */
+
+/**
+ * 제네릭 파라미터 T는 반환될 ViewModel의 타입을 나타냄
+ * 함수 내에서는 SearchViewModel의 인스턴스를 생성하고, 필요한 apiService를 주입
+ * 이후 생성된 SearchViewModel 인스턴스를 T 타입으로 캐스팅하여 반환
+ */

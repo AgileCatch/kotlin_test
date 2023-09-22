@@ -51,6 +51,22 @@ dependencies {
     //by viewModels를 사용하기 위한 의존성
     implementation ("androidx.activity:activity-ktx:1.7.2")
     implementation ("androidx.fragment:fragment-ktx:1.6.1")
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    // Converter ( JSON 타입 결과를 객체로 매핑 )
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    // okhttp3
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+    // Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+//    // ViewModel
+//    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -43,7 +43,7 @@ class LockerListAdapter : ListAdapter<LockerModel, LockerListAdapter.ViewHolder>
         fun bind(item: LockerModel)= with(binding){
 //이미지, 추가해야함
             binding.tvDate.text=item.date
-            binding.tvName.text=item.name
+            binding.tvTitle.text=item.name
         }
 
     }
