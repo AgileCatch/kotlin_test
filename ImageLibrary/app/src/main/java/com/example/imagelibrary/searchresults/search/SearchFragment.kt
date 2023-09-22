@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.imagelibrary.databinding.SearchFragmentBinding
-import java.util.concurrent.atomic.AtomicLong
 
 class SearchFragment : Fragment() {
     companion object {
@@ -24,7 +24,8 @@ class SearchFragment : Fragment() {
     }
 
     //현업코드 by viewModels -> 의존성 추가해주어야함.'
-    private val viewModel: SearchViewModel by viewModels { SearchViewModelFactory(AtomicLong(1L)) }
+//    val apiServiceInstance = RetrofitClient.apiService
+    private val viewModel: SearchViewModel by viewModels { SearchViewModelFactory() }
 
 
     override fun onCreateView(
@@ -44,20 +45,30 @@ class SearchFragment : Fragment() {
 
     }
 
-    private fun initViewModel()= with(viewModel) {
+    private fun initViewModel() = with(viewModel) {
         // viewModel 상 읽기용 list
         list.observe(viewLifecycleOwner) { // Fragment LV : observe(viewLifecycleOwner)
             listAdapter.submitList(it)
         }
     }
 
-    private fun initView()= with(binding) {
-        searchList.adapter=listAdapter
+    private fun initView() = with(binding) {
+        searchList.adapter = listAdapter
+
+        //검색
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.searchItems(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+
     }
 
-    fun setSearchContent(searchModel: SearchModel?) {
-        viewModel.addTodoItem(searchModel)
-    }
 
     //프래그먼트의 메모리 누수를 방지하기 위해 넣어줌 (구글 권장)
     override fun onDestroyView() {
@@ -65,3 +76,5 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
     }
 }
+
+

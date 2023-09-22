@@ -1,13 +1,12 @@
 package com.example.imagelibrary.searchresults.search
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
+import kotlinx.parcelize.Parcelize
 @Parcelize
-data class SearchModel (
-    val id: Long? = null,
-    val image : Int,
-    val name :String,
-    val date :String,
-    var isBookMark : Boolean =false
+data class SearchModel(
+    var title: String,
+    var dateTime: String,
+    var url: String,
+    var isLike : Boolean= false
 ) : Parcelable
+
