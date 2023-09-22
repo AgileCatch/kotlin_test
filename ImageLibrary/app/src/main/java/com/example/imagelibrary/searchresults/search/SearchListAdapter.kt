@@ -47,8 +47,8 @@ class SearchListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchModel)= with(binding){
             Glide.with(itemView).load(item.url)
-                .placeholder(R.drawable.ic_cat) // 이미지 로딩 중 사진
-                .error(R.drawable.icon_block) // 이미지를 불러오지 못했을 때 사진
+                .placeholder(R.drawable.loding) // 이미지 로딩 중 사진
+                .error(R.drawable.no) // 이미지를 불러오지 못했을 때 사진
                 .into(imageView)
             tvDate.text=item.dateTime
             tvTitle.text=item.title
