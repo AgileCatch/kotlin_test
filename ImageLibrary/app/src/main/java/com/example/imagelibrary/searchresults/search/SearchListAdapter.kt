@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imagelibrary.R
-import com.example.imagelibrary.databinding.LockerItemBinding
+import com.example.imagelibrary.databinding.SearchItemBinding
 
 
-class SearchListAdapter : ListAdapter<SearchModel, SearchListAdapter.ViewHolder>(
+class SearchListAdapter(
+    private val onLikeChecked: (SearchModel, Int) -> Unit
+): ListAdapter<SearchModel, SearchListAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<SearchModel>() {
         override fun areItemsTheSame(
             oldItem: SearchModel, newItem: SearchModel
@@ -29,9 +31,8 @@ class SearchListAdapter : ListAdapter<SearchModel, SearchListAdapter.ViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LockerItemBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
+            SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false),
+            onLikeChecked
         )
     }
 
@@ -41,7 +42,8 @@ class SearchListAdapter : ListAdapter<SearchModel, SearchListAdapter.ViewHolder>
     }
 
     class ViewHolder(
-        private val binding: LockerItemBinding
+        private val binding: SearchItemBinding,
+        private val onLikeChecked: (SearchModel, Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchModel)= with(binding){
             Glide.with(itemView).load(item.url)
@@ -50,6 +52,18 @@ class SearchListAdapter : ListAdapter<SearchModel, SearchListAdapter.ViewHolder>
                 .into(imageView)
             tvDate.text=item.dateTime
             tvTitle.text=item.title
+
+            //버튼 클릭시 북마크처리
+            btnLike.isSelected = item.isLiked
+
+            btnLike.setOnClickListener {
+                onLikeChecked(
+                    item.copy(
+                        isLiked = !item.isLiked
+                    ),
+                    adapterPosition
+                )
+            }
 
         }
 

@@ -22,10 +22,11 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_cat" />
 
-        <ImageView
-            android:id="@+id/iv_like"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_like"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:background="@drawable/bookmark_selector"
             android:src="@drawable/ic_heart" />
 
     </androidx.cardview.widget.CardView>
@@ -36,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="name"
+        android:text="title"
         android:textStyle="bold"
         android:textSize="20dp"
         android:maxLines="2"
