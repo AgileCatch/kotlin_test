@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.imagelibrary.api.RetrofitClient
 import com.example.imagelibrary.api.image.ImageModel
 import com.example.imagelibrary.api.video.VideoModel
+import com.example.imagelibrary.utils.formatDateTime
 import retrofit2.Response
 
 /**
@@ -55,8 +56,8 @@ class Repository {
             list.add(
                 i,
                 SearchModel(
-                    title = "[Image] ${this[i].displaySitename}",
-                    dateTime = this[i].datetime,
+                    title = "[Img] ${this[i].displaySitename}",
+                    dateTime = formatDateTime(this[i].datetime),
                     url = this[i].imageUrl
                 )
             )
@@ -70,8 +71,8 @@ class Repository {
             list.add(
                 i,
                 SearchModel(
-                    title = "[Video] ${this[i].title}",
-                    dateTime = this[i].datetime,
+                    title = "[Vid] ${this[i].title}",
+                    dateTime = formatDateTime(this[i].datetime),
                     url = this[i].thumbnail
                 )
             )
