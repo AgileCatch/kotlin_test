@@ -2,6 +2,7 @@ package com.example.imagelibrary.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.imagelibrary.R
 import com.example.imagelibrary.databinding.MainActivityBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
             tab.setText(viewPagerAdapter.getTitle(position))
         }.attach()
 
+        //Tab icon 설정
+        //Tab 아이콘 설정
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_gallery)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_heart_fill)
     }
 
 }

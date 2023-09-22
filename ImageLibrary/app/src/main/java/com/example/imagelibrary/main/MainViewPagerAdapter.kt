@@ -35,7 +35,4 @@ class MainViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return fragments[position].fragment
     }
-    fun getFragment(position: Int):Fragment{
-        return fragments[position].fragment
-    }
 }

@@ -20,14 +20,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_cat" />
+            android:src="@drawable/ic_cat"
+            />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_like"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bookmark_selector"
-            android:src="@drawable/ic_heart" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_cancel2"/>
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
