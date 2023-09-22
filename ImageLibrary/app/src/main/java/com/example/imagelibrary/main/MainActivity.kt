@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         //Tab icon 설정
         //Tab 아이콘 설정
         tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_gallery)
-        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_heart_fill)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_like)
     }
 
 }
