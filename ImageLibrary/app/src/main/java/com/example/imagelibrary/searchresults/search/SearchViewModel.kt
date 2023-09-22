@@ -38,7 +38,7 @@ class SearchViewModel(
         {
             currentList?.set(findPosition, item)
         }
-        _list.value = currentList!!
+        _list.value = currentList
     }
 
 
