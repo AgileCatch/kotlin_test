@@ -1,7 +1,7 @@
 package com.example.imagelibrary.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.imagelibrary.databinding.MainActivityBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout,viewPager) { tab, position ->
             tab.setText(viewPagerAdapter.getTitle(position))
         }.attach()
+
     }
 
 }
+

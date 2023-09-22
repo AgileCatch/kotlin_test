@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = binding.rvProductList
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         // 플로팅 버튼 및 스크롤 설정
         val fabUpArrow = binding.fabUpArrow
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
