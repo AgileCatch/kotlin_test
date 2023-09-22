@@ -8,10 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.imagelibrary.Constants
+import com.example.imagelibrary.Constants.Companion.PREFERENCES_KEY
 import com.example.imagelibrary.EntryType
 import com.example.imagelibrary.databinding.LockerFragmentBinding
 import com.example.imagelibrary.main.LockerState
 import com.example.imagelibrary.main.MainViewModel
+import com.example.imagelibrary.utils.loadBookmarkData
 import com.example.imagelibrary.utils.saveBookmarkData
 
 class LockerFragment : Fragment() {
@@ -19,7 +24,6 @@ class LockerFragment : Fragment() {
         //static 함수로 검색결과 fragment를 가져올 수 있는 instance 생성
         //이걸통해서 프래그먼트를 만듬
         fun newInstance() = LockerFragment()
-        val PREFERENCES_KEY = "preference_key_name"
     }
 
     private var _binding: LockerFragmentBinding? = null
@@ -56,26 +60,44 @@ class LockerFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-        //어댑터 연결
         lockerList.adapter = listAdapter
+
+        context?.let { context ->
+            loadBookmarkData(context, Constants.PREFERENCES_KEY).let { // SharedPreference 데이터 로드
+                viewModel.loadBookmarkModel(it)
+            }
+        }
+
+        val recyclerView = binding.lockerList
+        recyclerView.layoutManager = GridLayoutManager(context, 2) // 2열의 그리드로 설정 (원하는 열의 수로 변경 가능)
+        // 플로팅 버튼 및 스크롤 설정
+        val fabUpArrow = binding.fabTop
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) {
+                    fabUpArrow.show() // 아래로 스크롤하면 플로팅 버튼 보이기
+                } else {
+                    fabUpArrow.hide() // 위로 스크롤하면 플로팅 버튼 숨기기
+                }
+            }
+        })
+
+        fabUpArrow.setOnClickListener {
+            recyclerView.smoothScrollToPosition(0) // 최상단으로 스크롤
+        }
     }
 
-    private fun initViewModel() = with(viewModel) {
+    private fun initViewModel()= with(viewModel) {
         // viewModel 상 읽기용 list
         viewModel.list.observe(viewLifecycleOwner, Observer {
             listAdapter.submitList(it)
-            context?.let { context ->
-                saveBookmarkData(
-                    context,
-                    PREFERENCES_KEY,
-                    it
-                )
-            } // SharedPreference 데이터 저장
+            context?.let { context -> saveBookmarkData(context, PREFERENCES_KEY, it) } // SharedPreference 데이터 저장
         })
         activityViewModel.bookmarkState.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is LockerState.AddBookmark -> addBookmarkItem(state.bookmarkModel)
                 is LockerState.RemoveBookmark -> removeBookmarkItem(state.bookmarkModel, null)
+                else -> {}
             }
         })
     }

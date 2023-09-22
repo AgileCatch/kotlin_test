@@ -13,9 +13,9 @@ class Constants {
 
         var AUTH_HEADER = "KakaoAK 0c2b0f4463e8e6d131d8b5b40b4df180"
 
-        const val TYPE_IMAGE = 0
+        val PREFERENCES_KEY = "preference_key_name"
 
-        const val TYPE_VIDEO = 1
+
         // 개인 API 사용
     }
 }

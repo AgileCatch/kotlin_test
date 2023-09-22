@@ -55,7 +55,6 @@ class SearchListAdapter(
 
             //버튼 클릭시 북마크처리
             btnLike.isSelected = item.isLiked
-
             btnLike.setOnClickListener {
                 onLikeChecked(
                     item.copy(
@@ -64,6 +63,7 @@ class SearchListAdapter(
                     adapterPosition
                 )
             }
+
 
         }
 
