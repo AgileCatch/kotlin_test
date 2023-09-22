@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.example.imagelibrary.EntryType
 import com.example.imagelibrary.databinding.SearchFragmentBinding
+import com.example.imagelibrary.main.MainViewModel
+import com.example.imagelibrary.main.SearchState
 
 class SearchFragment : Fragment() {
     companion object {
@@ -18,14 +23,21 @@ class SearchFragment : Fragment() {
 
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = _binding!!
-
     private val listAdapter by lazy {
-        SearchListAdapter()
+        SearchListAdapter(
+            onLikeChecked = { item, position ->
+                modifySearchItem(item, position)
+                if (item.isLiked) {
+                    addToBookmarkTab(item, EntryType.ADD.name)
+                } else {
+                    removeToBookmarkTab(item, EntryType.REMOVE.name)
+                }
+            }
+        )
     }
 
-    //현업코드 by viewModels -> 의존성 추가해주어야함.'
-//    val apiServiceInstance = RetrofitClient.apiService
     private val viewModel: SearchViewModel by viewModels { SearchViewModelFactory() }
+    private val activityViewModel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -37,19 +49,21 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    //프래그먼트 뷰 생성후 해야할일 설정하는곳
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initViewModel()
-
     }
 
     private fun initViewModel() = with(viewModel) {
-        // viewModel 상 읽기용 list
-        list.observe(viewLifecycleOwner) { // Fragment LV : observe(viewLifecycleOwner)
+        list.observe(viewLifecycleOwner, Observer {
             listAdapter.submitList(it)
-        }
+        })
+        activityViewModel.searchState.observe(viewLifecycleOwner, Observer { state ->
+            when(state){
+                is SearchState.ModifySearch -> modifySearchItem(state.searchModel, null)
+            }
+        })
     }
 
     private fun initView() = with(binding) {
@@ -61,12 +75,22 @@ class SearchFragment : Fragment() {
                 query?.let { viewModel.searchItems(it) }
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
         })
 
+    }
+
+    private fun modifySearchItem(item: SearchModel, position: Int?) {
+        viewModel.modifyList(item, position)
+    }
+    private fun removeToBookmarkTab(item: SearchModel, name: String) {
+        activityViewModel.updateBookmarkState(item,name)
+    }
+
+    private fun addToBookmarkTab(item: SearchModel, name: String) {
+        activityViewModel.updateBookmarkState(item,name)
     }
 
 
