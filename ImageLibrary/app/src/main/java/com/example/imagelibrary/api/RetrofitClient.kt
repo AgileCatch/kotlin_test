@@ -18,18 +18,4 @@ object RetrofitClient {
         retrofit.create(RetrofitInterface::class.java
         )
     }
-
-
-
-//    val api : com.example.kakaoimglibrary.importAPI.Retrofit by lazy {
-//        retrofit.create(com.example.kakaoimglibrary.importAPI.Retrofit::class.java
-//        )
-//    }
-//
-//    private val retrofit by lazy {
-//        Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
 }
